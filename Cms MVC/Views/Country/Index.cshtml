@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Population)
         </th>
         <th>
-            Cities
+            @Html.DisplayNameFor(model => model.Cities)
         </th>
         <th></th>
     </tr>
@@ -34,10 +34,11 @@
         <td>
             @foreach (var item2 in item.Cities)
             {
-                <div>@item2.CityName</div>
+                <div>@item2.CityName @Html.ActionLink("Edit", "EditCity", new {id=item2.CityId})</div>
                 <div>@string.Format("{0}", item2.Population.ToString("N0"))</div>
                 <br />
             }
+            <div>@Html.ActionLink("New City", "AddCity", new {CountryId=item.CountryId})</div>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CountryId }) |

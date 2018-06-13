@@ -210,9 +210,19 @@
     <Compile Include="Migrations\201806121504354_populationChange.Designer.cs">
       <DependentUpon>201806121504354_populationChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806130932003_PersonCountryAdded.cs" />
+    <Compile Include="Migrations\201806130932003_PersonCountryAdded.Designer.cs">
+      <DependentUpon>201806130932003_PersonCountryAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131116578_addedCityToPerson.cs" />
+    <Compile Include="Migrations\201806131116578_addedCityToPerson.Designer.cs">
+      <DependentUpon>201806131116578_addedCityToPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddPersonViewModel.cs" />
     <Compile Include="Models\CmsDb.cs" />
+    <Compile Include="Models\EditCityViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\List information\City.cs" />
     <Compile Include="Models\List information\Country.cs" />
@@ -281,6 +291,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\EditCity.cshtml" />
+    <Content Include="Views\Country\AddCity.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,6 +320,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806121504354_populationChange.resx">
       <DependentUpon>201806121504354_populationChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806130932003_PersonCountryAdded.resx">
+      <DependentUpon>201806130932003_PersonCountryAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131116578_addedCityToPerson.resx">
+      <DependentUpon>201806131116578_addedCityToPerson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
