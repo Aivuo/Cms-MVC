@@ -1,4 +1,6 @@
 ﻿using Cms_MVC.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,12 @@ using System.Web.Mvc;
 
 namespace Cms_MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         CmsDb _db = new CmsDb();
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var model = _db.People.Include("Country")
@@ -75,18 +79,52 @@ namespace Cms_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult About()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            var removeMe =_db.People.First(x => x.PersonId == id);
+            _db.People.Remove(removeMe);
 
-            return View();
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Contact()
+        [Authorize(Roles = "Admin")]
+        public ActionResult CheckUsers()
         {
-            ViewBag.Message = "Your contact page.";
+            var AppDb = new ApplicationDbContext();
 
-            return View();
+            var model = AppDb.Users.ToList();
+
+            return View(model);
+        }
+
+        [Authorize(Users ="Admin@Admin.com")]
+        public ActionResult AddAdmin(string userName)
+        {
+            var AppDb = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(AppDb));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(AppDb));
+
+            var model = AppDb.Users.First(x => x.UserName == userName);
+
+            var check = UserManager.AddToRole(model.Id, "Admin");
+
+            return RedirectToAction("CheckUsers");
+        }
+
+        [Authorize(Users = "Admin@Admin.com")]
+        public ActionResult RemoveAdmin(string userName)
+        {
+            var AppDb = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(AppDb));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(AppDb));
+
+            var model = AppDb.Users.First(x => x.UserName == userName);
+
+            var check = UserManager.RemoveFromRole(model.Id, "Admin");
+
+            return RedirectToAction("CheckUsers");
         }
     }
 }

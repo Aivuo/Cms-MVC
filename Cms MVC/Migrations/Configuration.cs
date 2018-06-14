@@ -1,11 +1,14 @@
 namespace Cms_MVC.Migrations
 {
     using Cms_MVC.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.Security;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Cms_MVC.Models.CmsDb>
     {
@@ -154,6 +157,32 @@ namespace Cms_MVC.Migrations
 
                 context.SaveChanges();
             }
+
+            ApplicationDbContext context2 = new ApplicationDbContext();
+
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context2));
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context2));
+
+
+
+            //var roles = Roles.Provider;
+            //var membership = Membership.Provider;
+
+            //if (!roles.RoleExists("Admin"))
+            //{
+            //    roles.CreateRole("Admin");
+            //}
+
+            //if (membership.GetUser("Admin@Admin.com", false) == null)
+            //{
+            //    var m = MembershipCreateStatus.Success;
+            //    membership.CreateUser("Admin@Admin.com", "password", "Admin@Admin.com", null, null, true, "Admin@Admin.com", out m);
+            //}
+
+            //if (!roles.GetRolesForUser("Admin@Admin.com").Contains("Admin"))
+            //{
+            //    roles.AddUsersToRoles(new[] { "Admin@Admin.com" }, new[] { "Admin" });
+            //}
         }
     }
 }

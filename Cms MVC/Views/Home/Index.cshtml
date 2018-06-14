@@ -10,7 +10,7 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-}
+
 <table class="table">
     <tr>
         <th>
@@ -49,11 +49,14 @@
             @Html.DisplayFor(modelItem => item.City.CityName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersonId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })
+            @if (User.IsInRole("Admin"))
+            {
+                <div>@Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })</div>
+                
+            }
         </td>
     </tr>
 }
 
 </table>
+}
