@@ -100,13 +100,13 @@ namespace Cms_MVC.Controllers
         }
 
         [Authorize(Users ="Admin@Admin.com")]
-        public ActionResult AddAdmin(string userName)
+        public ActionResult AddAdmin(string id)
         {
             var AppDb = new ApplicationDbContext();
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(AppDb));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(AppDb));
 
-            var model = AppDb.Users.First(x => x.UserName == userName);
+            var model = AppDb.Users.First(x => x.Id == id);
 
             var check = UserManager.AddToRole(model.Id, "Admin");
 
@@ -114,13 +114,13 @@ namespace Cms_MVC.Controllers
         }
 
         [Authorize(Users = "Admin@Admin.com")]
-        public ActionResult RemoveAdmin(string userName)
+        public ActionResult RemoveAdmin(string id)
         {
             var AppDb = new ApplicationDbContext();
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(AppDb));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(AppDb));
 
-            var model = AppDb.Users.First(x => x.UserName == userName);
+            var model = AppDb.Users.First(x => x.Id == id);
 
             var check = UserManager.RemoveFromRole(model.Id, "Admin");
 

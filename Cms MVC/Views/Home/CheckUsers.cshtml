@@ -44,7 +44,7 @@
         <td>
             @if (User.Identity.Name == "Admin@Admin.com")
             {
-                <div>@Html.ActionLink("Give Admin Rights", "AddAdmin", new { userName=item.UserName }), @Html.ActionLink("Remove Admin Rights", "RemoveAdmin", new { userName=item.UserName })</div>
+                <div>@Html.ActionLink("Give Admin Rights", "AddAdmin", new {id=item.Id }), @Html.ActionLink("Remove Admin Rights", "RemoveAdmin", new { id=item.Id })</div>
             }
         </td>
     </tr>
